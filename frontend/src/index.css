@@ -1,0 +1,362 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design System Tokens ─── */
+:root {
+  /* Surfaces */
+  --surface: #e0e5ec;
+  --surface-bright: #ecf0f6;
+  --surface-container: #e8ecf2;
+  --surface-high: #edf1f6;
+  --surface-low: #d6dbe4;
+  --surface-lowest: #ced4de;
+
+  /* Content */
+  --on-surface: #1a2535;
+  --on-surface-muted: #5b6880;
+  --on-surface-faint: #8fa0b6;
+
+  /* Accent */
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-container: #1d4ed8;
+  --on-primary: #ffffff;
+  --tertiary: #ef4444;
+  --tertiary-muted: rgba(239, 68, 68, 0.12);
+
+  /* Neumorphic shadows (light) */
+  --neu: 8px 8px 16px #b8bcc2, -8px -8px 16px #ffffff;
+  --neu-sm: 4px 4px 8px #b8bcc2, -4px -4px 8px #ffffff;
+  --neu-xs: 2px 2px 5px #b8bcc2, -2px -2px 5px #ffffff;
+  --neu-inset: inset 8px 8px 16px #b8bcc2, inset -8px -8px 16px #ffffff;
+  --neu-inset-sm: inset 4px 4px 8px #b8bcc2, inset -4px -4px 8px #ffffff;
+  --neu-inset-xs: inset 2px 2px 5px #b8bcc2, inset -2px -2px 5px #ffffff;
+
+  /* Transition speed */
+  --t: 0.22s;
+}
+
+.dark {
+  --surface: #1e2a3a;
+  --surface-bright: #2a3a50;
+  --surface-container: #243044;
+  --surface-high: #2d3f56;
+  --surface-low: #192233;
+  --surface-lowest: #141d2b;
+
+  --on-surface: #e2e8f0;
+  --on-surface-muted: #8fa0b6;
+  --on-surface-faint: #4e6280;
+
+  --primary: #60a5fa;
+  --primary-hover: #93c5fd;
+  --primary-container: #1d4ed8;
+  --on-primary: #ffffff;
+  --tertiary: #f87171;
+  --tertiary-muted: rgba(248, 113, 113, 0.12);
+
+  --neu: 6px 6px 12px #141c27, -6px -6px 12px #28364f;
+  --neu-sm: 3px 3px 6px #141c27, -3px -3px 6px #28364f;
+  --neu-xs: 2px 2px 4px #141c27, -2px -2px 4px #28364f;
+  --neu-inset: inset 6px 6px 12px #141c27, inset -6px -6px 12px #28364f;
+  --neu-inset-sm: inset 3px 3px 6px #141c27, inset -3px -3px 6px #28364f;
+  --neu-inset-xs: inset 2px 2px 4px #141c27, inset -2px -2px 4px #28364f;
+}
+
+/* ─── Base Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ─── Global theme transition ─── */
+*,
+*::before,
+*::after {
+  transition:
+    background-color var(--t) ease,
+    color var(--t) ease,
+    border-color var(--t) ease,
+    box-shadow var(--t) ease;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Neumorphic Utilities ─── */
+@layer utilities {
+  .neu-raised {
+    box-shadow: var(--neu);
+  }
+  .neu-raised-sm {
+    box-shadow: var(--neu-sm);
+  }
+  .neu-raised-xs {
+    box-shadow: var(--neu-xs);
+  }
+  .neu-well {
+    box-shadow: var(--neu-inset);
+  }
+  .neu-well-sm {
+    box-shadow: var(--neu-inset-sm);
+  }
+  .neu-well-xs {
+    box-shadow: var(--neu-inset-xs);
+  }
+
+  .surface {
+    background-color: var(--surface);
+  }
+  .surface-bright {
+    background-color: var(--surface-bright);
+  }
+  .surface-c {
+    background-color: var(--surface-container);
+  }
+  .surface-high {
+    background-color: var(--surface-high);
+  }
+  .surface-low {
+    background-color: var(--surface-low);
+  }
+  .surface-lowest {
+    background-color: var(--surface-lowest);
+  }
+
+  .text-on {
+    color: var(--on-surface);
+  }
+  .text-muted {
+    color: var(--on-surface-muted);
+  }
+  .text-faint {
+    color: var(--on-surface-faint);
+  }
+  .text-primary {
+    color: var(--primary);
+  }
+  .text-tertiary {
+    color: var(--tertiary);
+  }
+
+  .btn-primary {
+    background: linear-gradient(
+      160deg,
+      var(--primary) 0%,
+      var(--primary-container) 100%
+    );
+    color: var(--on-primary);
+    box-shadow: var(--neu-sm);
+    transition:
+      box-shadow var(--t) ease,
+      transform var(--t) ease,
+      filter var(--t) ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+  .btn-primary:active {
+    box-shadow: var(--neu-inset-sm);
+    transform: scale(0.98);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: var(--surface);
+    color: var(--on-surface);
+    box-shadow: var(--neu-sm);
+    transition:
+      box-shadow var(--t) ease,
+      transform var(--t) ease;
+  }
+  .btn-secondary:hover {
+    background-color: var(--surface-high);
+  }
+  .btn-secondary:active {
+    box-shadow: var(--neu-inset-sm);
+    transform: scale(0.98);
+  }
+
+  .btn-danger {
+    background-color: var(--tertiary-muted);
+    color: var(--tertiary);
+    box-shadow: var(--neu-sm);
+    transition:
+      box-shadow var(--t) ease,
+      transform var(--t) ease,
+      background-color var(--t) ease;
+  }
+  .btn-danger:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+  }
+  .btn-danger:active {
+    box-shadow: var(--neu-inset-sm);
+    transform: scale(0.98);
+  }
+  .btn-danger:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .neu-input {
+    background-color: var(--surface-low);
+    box-shadow: var(--neu-inset-sm);
+    color: var(--on-surface);
+    outline: none;
+    transition: box-shadow var(--t) ease;
+  }
+  .neu-input::placeholder {
+    color: var(--on-surface-faint);
+  }
+  .neu-input:focus {
+    box-shadow:
+      var(--neu-inset-sm),
+      0 0 0 2px rgba(59, 130, 246, 0.18);
+  }
+
+  .glass {
+    background: rgba(var(--surface-rgb, 224, 229, 236), 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--on-surface-faint);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--on-surface-muted);
+}
+
+/* ─── AI Prose (ReactMarkdown) ─── */
+.ai-prose {
+  font-family: "Inter", sans-serif;
+  line-height: 1.75;
+}
+.ai-prose p {
+  margin-bottom: 0.65rem;
+}
+.ai-prose p:last-child {
+  margin-bottom: 0;
+}
+.ai-prose strong {
+  font-weight: 600;
+  color: var(--primary);
+}
+.ai-prose em {
+  font-style: italic;
+  color: var(--on-surface-muted);
+}
+.ai-prose ul,
+.ai-prose ol {
+  padding-left: 1.4rem;
+  margin-bottom: 0.65rem;
+}
+.ai-prose li {
+  margin-bottom: 0.2rem;
+}
+.ai-prose h1,
+.ai-prose h2,
+.ai-prose h3 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  margin: 0.75rem 0 0.4rem;
+}
+.ai-prose h1 {
+  font-size: 1.4rem;
+}
+.ai-prose h2 {
+  font-size: 1.2rem;
+}
+.ai-prose h3 {
+  font-size: 1.05rem;
+}
+.ai-prose code {
+  background: var(--surface-lowest);
+  padding: 0.12em 0.38em;
+  border-radius: 0.3rem;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.82em;
+  color: var(--primary);
+  box-shadow: var(--neu-inset-xs);
+}
+.ai-prose pre {
+  background: var(--surface-lowest);
+  padding: 1rem 1.2rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  box-shadow: var(--neu-inset-sm);
+}
+.ai-prose pre code {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  color: var(--on-surface);
+  font-size: 0.85em;
+}
+.ai-prose blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 0.9rem;
+  margin: 0.65rem 0;
+  color: var(--on-surface-muted);
+  font-style: italic;
+}
+
+/* ─── Shimmer skeleton ─── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-low) 25%,
+    var(--surface-high) 50%,
+    var(--surface-low) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ─── Toast slide-in ─── */
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.toast-enter {
+  animation: toastIn 0.28s ease forwards;
+}
