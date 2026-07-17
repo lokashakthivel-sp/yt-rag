@@ -8,13 +8,11 @@ import {
   AskResponse,
 } from '../types';
 
-const BASE_URL = 'http://localhost:8000';
-
 async function request<T>(
   path: string,
   options?: RequestInit
 ): Promise<T> {
-  const response = await fetch(`${BASE_URL}${path}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${path}`, {
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     ...options,
   });
