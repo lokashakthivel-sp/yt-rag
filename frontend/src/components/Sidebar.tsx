@@ -32,7 +32,7 @@ const SectionLabel: React.FC<{ children: React.ReactNode }> = ({
   <p
     className="text-xs font-semibold uppercase tracking-widest mb-2"
     style={{
-      color: "var(--on-surface-faint)",
+      color: "var(--on-surface-muted)",
       fontFamily: "Manrope, sans-serif",
     }}
   >
@@ -396,7 +396,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       <p
                         className="text-xs font-medium leading-snug line-clamp-2"
                         style={{
-                          color: "var(--on-surface)",
+                          color: "var(--on-surface-muted)",
                           fontFamily: "Inter, sans-serif",
                         }}
                       >
